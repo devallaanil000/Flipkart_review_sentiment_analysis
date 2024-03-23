@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Results</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #e74c3c;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.01);
+        }
+        p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        #sentimentEmoji {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        /* Added color to text */
+        .positive-text {
+            color: #2ecc71; /* Green color for positive text */
+        }
+        .negative-text {
+            color: #e74c3c; /* Red color for negative text */
+        }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis </h1>
+    <div class="container">
+        <p>Your review: <strong>{{ review }}</strong></p>
+        <!-- Added color classes for sentiment -->
+        <p>Sentiment: <strong class="{{ sentimentClass }}">{{ sentiment }}</strong></p>
+        <p id="sentimentEmoji"></p>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        // JavaScript code to dynamically update the emoji based on sentiment
+        var sentimentResult = "{{ sentiment }}"; // Get the sentiment result from your backend
+
+        // Define emojis for positive and negative sentiments
+        var positiveEmoji = "Thanktou😊"; // You can replace this with any positive emoji you like
+        var negativeEmoji = "Thankyou😔"; // You can replace this with any negative emoji you like
+
+        // Get the element where the emoji will be displayed
+        var emojiElement = document.getElementById("sentimentEmoji");
+
+        // Update the emoji based on the sentiment result
+        if (sentimentResult === "Positive") {
+            emojiElement.textContent = positiveEmoji;
+            document.querySelector('.container').classList.add('positive-text');
+        } else if (sentimentResult === "Negative") {
+            emojiElement.textContent = negativeEmoji;
+            document.querySelector('.container').classList.add('negative-text');
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
